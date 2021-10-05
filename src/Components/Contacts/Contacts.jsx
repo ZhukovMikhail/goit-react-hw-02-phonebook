@@ -1,23 +1,26 @@
 import React from 'react';
 
-const Contacts = ({ contItems, filteredValue }) => {
+const Contacts = ({ contItems, filteredValue, deleteHandler }) => {
   if (filteredValue !== '') {
     const filteredArr = contItems.filter(contItem =>
       contItem.name.toLowerCase().includes(filteredValue.toLowerCase()),
     );
+
     return filteredArr.map(contItem => (
-      <li>
+      <li id={contItem.id}>
         <span>{contItem.name}</span>
         <span>{contItem.number}</span>
+        <button onClick={deleteHandler}>delete</button>
       </li>
     ));
   } else {
     return (
       <ul>
         {contItems.map(contItem => (
-          <li>
+          <li id={contItem.id}>
             <span>{contItem.name}</span>
             <span>{contItem.number}</span>
+            <button onClick={deleteHandler}>delete</button>
           </li>
         ))}
       </ul>

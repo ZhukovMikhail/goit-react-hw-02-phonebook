@@ -36,6 +36,14 @@ class App extends Component {
       number: '',
     });
   };
+  deleteHandler = e => {
+    console.dir(e.currentTarget.parentElement.id);
+    this.setState({
+      contacts: this.state.contacts.filter(
+        contact => contact.id !== e.currentTarget.parentElement.id,
+      ),
+    });
+  };
   render() {
     return (
       <div className="section">
@@ -80,6 +88,7 @@ class App extends Component {
         <Contacts
           contItems={this.state.contacts}
           filteredValue={this.state.filter}
+          deleteHandler={this.deleteHandler}
         />
       </div>
     );

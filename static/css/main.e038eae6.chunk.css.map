@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,MACE,YAAa,CACb,qBACF,CACA,MACE,WACF,CACA,OACE,eACF","file":"main.e038eae6.chunk.css","sourcesContent":["label {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\ninput {\r\n  width: 350px;\r\n}\r\nbutton {\r\n  margin-top: 20px;\r\n}\r\n"]}

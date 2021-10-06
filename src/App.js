@@ -1,7 +1,8 @@
 import './App.css';
 import React, { Component } from 'react';
-import Contacts from './Components/Contacts/Contacts.jsx';
-// import Filter from './Components/Filter/Filter.jsx';
+import ContactForm from './Components/ContactForm/ContactForm.jsx';
+import ContactList from './Components/Contacts/Contacts.jsx';
+import Filter from './Components/Filter/Filter.jsx';
 import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
@@ -24,6 +25,11 @@ class App extends Component {
   };
   onSubmitForm = e => {
     e.preventDefault();
+
+    if (this.state.contacts.find(contact => contact.name === this.state.name)) {
+      alert(this.state.name + ' is already in contacts');
+      return;
+    }
     //не работает метод push()!!!!!!!!! не понял почему!!!!!!!!!!!!!! 1 час в пустую!
     this.setState(prev => ({
       contacts: [
@@ -46,51 +52,27 @@ class App extends Component {
   };
   render() {
     return (
-      <div className="section">
-        <form onSubmit={this.onSubmitForm}>
-          <label>
-            Name
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.hendleOnchange}
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-              required
-            />
-          </label>
-          <label>
-            Number
-            <input
-              type="tel"
-              name="number"
-              value={this.state.number}
-              onChange={this.hendleOnchange}
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-              required
-            />
-          </label>
-          <button type="submit">Add Contact</button>
-        </form>
-        <h2>Contatts</h2>
-        <label>
-          Find contacts by name
-          <input
-            type="text"
-            name="filter"
-            value={this.state.filter}
-            onChange={this.hendleOnchange}
+      <>
+        <div className="section">
+          <h2>Phonebook</h2>
+          <ContactForm
+            onSubmit={this.onSubmitForm}
+            hendleOnchange={this.hendleOnchange}
+            stateName={this.state.name}
+            stateValue={this.state.number}
           />
-        </label>
-
-        <Contacts
+        </div>
+        <h2>Contatts</h2>
+        <Filter
+          filterValue={this.state.filter}
+          onFilterChange={this.hendleOnchange}
+        />
+        <ContactList
           contItems={this.state.contacts}
           filteredValue={this.state.filter}
           deleteHandler={this.deleteHandler}
         />
-      </div>
+      </>
     );
   }
 }

@@ -1,33 +1,20 @@
 import React from 'react';
 
 const Contacts = ({ contItems, filteredValue, deleteHandler }) => {
-  if (filteredValue !== '') {
-    const filteredArr = contItems.filter(contItem =>
-      contItem.name.toLowerCase().includes(filteredValue.toLowerCase()),
-    );
+  const filteredItems = contItems.filter(contItem =>
+    contItem.name.toLowerCase().includes(filteredValue.toLowerCase()),
+  );
+  const renderItems = filteredValue !== '' ? filteredItems : contItems;
 
-    return filteredArr.map(contItem => (
-      <li id={contItem.id}>
-        <span>{contItem.name}</span>
-        <span>{contItem.number}</span>
+  return renderItems.map(renderItem => (
+    <ul>
+      <li id={renderItem.id}>
+        <span>{renderItem.name}</span>
+        <span>{renderItem.number}</span>
         <button onClick={deleteHandler}>delete</button>
       </li>
-    ));
-  } else {
-    return (
-      <ul>
-        {contItems.map(contItem => (
-          <li id={contItem.id}>
-            <span>{contItem.name}</span>
-            <span>{contItem.number}</span>
-            <button onClick={deleteHandler}>delete</button>
-          </li>
-        ))}
-      </ul>
-    );
-  }
+    </ul>
+  ));
 };
 
 export default Contacts;
-// filteredValue !== 0 &&
-// filteredValue === contItem.name &&

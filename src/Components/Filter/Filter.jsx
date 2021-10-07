@@ -19,4 +19,6 @@ export default Filter;
 
 Filter.prototype = {
   input: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  filterValue: PropTypes.string,
+  onFilterChange: PropTypes.func,
 };

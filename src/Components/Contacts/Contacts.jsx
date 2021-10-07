@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Contacts.module.css';
 
 const ContactList = ({ contItems, filteredValue, deleteHandler }) => {
   const filteredItems = contItems.filter(contItem =>
@@ -7,13 +8,15 @@ const ContactList = ({ contItems, filteredValue, deleteHandler }) => {
   const renderItems = filteredValue !== '' ? filteredItems : contItems;
 
   return renderItems.map(renderItem => (
-    <ul>
-      <li id={renderItem.id}>
+    <li className={styles.items} id={renderItem.id}>
+      <div className={styles.contItemsWrapper}>
         <span>{renderItem.name}</span>
         <span>{renderItem.number}</span>
-        <button onClick={deleteHandler}>delete</button>
-      </li>
-    </ul>
+      </div>
+      <button className={styles.itemBtn} type="button" onClick={deleteHandler}>
+        Delete
+      </button>
+    </li>
   ));
 };
 

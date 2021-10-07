@@ -1,9 +1,12 @@
 import React from 'react';
+import styles from './Filter.module.css';
+import PropTypes from 'prop-types';
 const Filter = ({ filterValue, onFilterChange }) => {
   return (
-    <label>
+    <label className={styles.labelFilter}>
       Find contacts by name
       <input
+        className={styles.input}
         type="text"
         name="filter"
         value={filterValue}
@@ -13,3 +16,7 @@ const Filter = ({ filterValue, onFilterChange }) => {
   );
 };
 export default Filter;
+
+Filter.prototype = {
+  input: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
